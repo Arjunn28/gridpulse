@@ -6,21 +6,27 @@ Arjun Abbimutt Nagendra Kumar · UT Austin · Fall 2026
 
 ---
 
-## Why Texas, and why now
+## Background
 
-Texas runs its own power grid, operated by ERCOT, and Texas summers are brutally hot. For decades that
-made Texas electricity demand surprisingly easy to predict: when it is hot, air conditioners run and
-demand climbs; at night it cools down and demand falls. Weather, time of day and day of week explained
-most of what the grid needed. When weather goes to extremes, the stakes are high: Winter Storm Uri in
-February 2021 left millions of Texans without power ([Busby et al., 2021](https://doi.org/10.1016/j.erss.2021.102106)).
+**ERCOT** (the Electric Reliability Council of Texas) runs the power grid that serves about 90% of Texas
+electricity demand. Unlike most US grids, it is largely cut off from its neighbours, so Texas demand has
+to be met almost entirely inside Texas. That makes ERCOT a clean place to study how changes in demand
+play out.
 
-Then AI arrived. Data centers are flooding into Texas. ERCOT's queue of large-load connection requests
-passed 233 GW at the end of 2025, up almost 300% in a year, with more than 70% of it data centers
+Texas summers are long and hot, and for decades that made Texas demand fairly easy to predict. When it
+is hot, air conditioners run and demand climbs; at night it cools down and demand falls. Weather, time
+of day and day of week explained most of what the grid needed. When the weather goes to extremes, the
+stakes are high: Winter Storm Uri in February 2021 left millions of Texans without power
+([Busby et al., 2021](https://doi.org/10.1016/j.erss.2021.102106)).
+
+Data centers are now arriving in Texas at scale. ERCOT's queue of large-load connection requests passed
+233 GW at the end of 2025, up almost 300% in a year, with more than 70% of it data centers
 ([Utility Dive](https://www.utilitydive.com/news/ercots-large-load-queue-jumped-almost-300-last-year-official/808820/)).
-A data center does not care about the weather. It runs flat out, day and night, summer and winter.
+A data center does not respond to the weather. It runs at a steady level, day and night, summer and
+winter.
 
-So a simple question: **if a growing share of Texas demand no longer follows the weather, does Texas
-electricity become harder to predict?**
+The question: **if a growing share of Texas demand no longer follows the weather, does Texas electricity
+become harder to predict?**
 
 ### What others have looked at
 
@@ -34,8 +40,8 @@ electricity become harder to predict?**
   that much of it may not arrive on schedule
   ([Grid Strategies, 2025](https://gridstrategiesllc.com/wp-content/uploads/Grid-Strategies-National-Load-Growth-Report-2025.pdf)).
 
-No one had checked the actual hourly operating record with machine learning to ask whether the new load
-has changed how predictable Texas is. That is what this project does.
+I could not find a study that uses the actual hourly operating record and machine learning to ask
+whether the new load has changed how predictable Texas is. That is the gap this project addresses.
 
 ## Hypotheses
 
@@ -52,9 +58,16 @@ Everything is public and free. About 67,600 hours from January 2019 to September
 
 | Source | What it is | What it does in this project |
 |---|---|---|
-| [EIA-930 Hourly Electric Grid Monitor](https://www.eia.gov/electricity/gridmonitor/), BALANCE files | The US government's hourly record of every US grid: demand, ERCOT's own day-ahead forecast and generation by fuel (wind, solar, gas, coal, nuclear) | Demand is what we predict. Demand minus wind and solar ("net load") is what other power plants must cover, our second target. ERCOT's forecast is the benchmark to compare against |
-| EIA-930 SUBREGION files | The same demand split across ERCOT's 8 weather zones (Houston, Dallas, Far West and so on) | Shows **where** in Texas demand is growing, and lets us test each region's weather response separately |
+| [EIA-930 Hourly Electric Grid Monitor](https://www.eia.gov/electricity/gridmonitor/), BALANCE files | The US government's hourly record of every US grid: demand, ERCOT's own day-ahead forecast and generation by fuel (wind, solar, gas, coal, nuclear) | Demand is the main target to predict. Demand minus wind and solar ("net load") is what other power plants must cover, the second target. ERCOT's forecast is the benchmark to compare against |
+| EIA-930 SUBREGION files | The same demand split across ERCOT's 8 weather zones (Houston, Dallas, Far West and so on) | Shows **where** in Texas demand is growing, and allows each region's weather response to be tested separately |
 | [Open-Meteo historical weather](https://open-meteo.com/en/docs/historical-weather-api) (ERA5) | Hourly temperature, humidity, wind, cloud and sunshine at one station per weather zone | The weather side of the story. Each zone is weighted by its share of demand to build one Texas-wide weather signal |
+
+**Why these sources.** EIA-930 is the official, free hourly record kept by the US Energy Information
+Administration. It covers every US grid in the same format, so the same analysis can later be run on
+other regions, and it includes ERCOT's own forecast, which gives a professional benchmark to compare against. Open-Meteo serves
+ERA5, a reconstruction of past weather from the European Centre for Medium-Range Weather Forecasts. It
+is free, has no missing hours and works for any location, so the weather comes from exactly the eight
+stations used in earlier ERCOT research (Skiles, Rhodes and Webber, 2023).
 
 Five silent data problems were found and fixed along the way: EIA renamed its columns in 2024, the two
 sources stamp hours differently, two columns shared a name, the target was misaligned by a day, and
@@ -66,7 +79,7 @@ same-hour wind and solar let the model rebuild the answer by arithmetic. None of
 
 ![demand vs temperature](reports/figures/07_demand_vs_temperature.png)
 
-**What we did.** Plotted every hour of 2019 and 2025: temperature across, demand up. The lines are the
+**What I did.** Plotted every hour of 2019 and 2025: temperature across, demand up. The lines are the
 average at each degree.
 
 **What it shows.** The classic hockey stick: demand rises steeply above about 20C as air conditioning
@@ -79,7 +92,7 @@ whatever the weather.
 
 ![load shape](reports/figures/03_load_shape_flattening.png)
 
-**What we did.** For every day, took the lowest and highest hour of demand, then averaged by year.
+**What I did.** For every day, took the lowest and highest hour of demand, then averaged by year.
 
 **What it shows.** Since 2019 the daily low rose 41% and the daily high 34%. The low-to-high ratio climbed
 from 0.70 to 0.73.
@@ -91,7 +104,7 @@ is what always-on load looks like.
 
 ![zone shares](reports/figures/05_zone_shares.png)
 
-**What we did.** Split Texas demand into its 8 weather zones and tracked each zone's share.
+**What I did.** Split Texas demand into its 8 weather zones and tracked each zone's share.
 
 **What it shows.** Far West Texas went from 7.7% to 13.5% of all Texas demand (2019 to 2025). Houston
 and Dallas lost share even though they grew.
@@ -103,7 +116,7 @@ connecting.
 
 ![error by year](reports/figures/08f_error_by_fold_and_solar.png)
 
-**What we did.** Trained a model to predict each hour 24 hours ahead from public weather, the calendar and
+**What I did.** Trained a model to predict each hour 24 hours ahead from public weather, the calendar and
 recent demand. Tested it on five consecutive years, always training only on the past.
 
 **What it shows.** Left: demand error stays around 3% and is lowest in the latest year (blue). Net load
@@ -118,7 +131,7 @@ load.
 
 ![cooling response](reports/figures/08j_cooling_response_ci.png)
 
-**What we did.** For each year, measured how much demand rises per degree of heat, as a percent of the
+**What I did.** For each year, measured how much demand rises per degree of heat, as a percent of the
 year's base demand. Error bars are 95% confidence intervals built by resampling whole weeks.
 
 **What it shows.** In 2019 each degree added 5.8% of base demand. In 2025, 4.6%. The early years
@@ -132,7 +145,7 @@ grew only 4%. A shrinking share of Texas demand is about the weather.
 
 ![zones by year](reports/figures/08k_zone_heatmaps.png)
 
-**What we did.** Repeated the same weather test for each zone and year. The left panel is the share of
+**What I did.** Repeated the same weather test for each zone and year. The left panel is the share of
 each zone's demand that weather and the calendar explain (R2, where 1 means fully explained).
 
 **What it shows.** In Far West Texas that share fell from 0.65 to 0.21. Houston, Dallas, Austin and
@@ -145,7 +158,7 @@ centers and crypto mining, though oil and gas activity there is another possible
 
 ![training history](reports/figures/09h_training_history.png)
 
-**What we did.** Predicted the most recent year using weather alone, trained on the last 1, 2, 3 or 4
+**What I did.** Predicted the most recent year using weather alone, trained on the last 1, 2, 3 or 4
 years, or on everything.
 
 **What it shows.** With one year of history the error is 4.3%. With all years it is 13.5%. Adding older
@@ -158,7 +171,7 @@ accurate, a forecast now has to know the rising always-on floor.
 
 ![stress hours](reports/figures/10a_stress_hours.png)
 
-**What we did.** Called an hour "stressed" when net load was in the top 5% of the past year. Then trained
+**What I did.** Called an hour "stressed" when net load was in the top 5% of the past year. Then trained
 classifiers to flag those hours a day ahead and compared them with a simple rule: "stressed yesterday at
 this hour".
 
@@ -188,9 +201,7 @@ megawatts it can miss by.
 ## What is next
 
 - Run the same analysis on other US grids (PJM, MISO, CAISO, SPP) to see whether Texas stands out.
-- An interactive website where anyone can explore the charts, compare years and zones and see how a
-  2019 model and a 2026 model respond to the same heatwave.
-- A blog post with the full story.
+- Freeze the input data in the repo with checksums, so anyone can reproduce every number exactly.
 
 ## Repo
 
