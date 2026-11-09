@@ -1,9 +1,16 @@
-pandas
-numpy
-scikit-learn
-statsmodels
-scipy
-matplotlib
-pyarrow
-holidays
-requests
+# Versions that reproduce the Oct 30, 2026 reference numbers (Python 3.14)
+pandas==2.3.3
+numpy==2.3.5
+scikit-learn==1.7.2
+scipy==1.16.3
+statsmodels==0.14.5
+matplotlib==3.10.8
+pyarrow==26.0.1
+holidays==0.108
+requests==2.34.2
+openpyxl==3.1.5
+# to run the notebook headlessly and the tests
+jupyter==1.1.1
+nbconvert==7.17.2
+ipykernel==7.4.0
+pytest==9.2.0
