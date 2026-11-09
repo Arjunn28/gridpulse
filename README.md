@@ -177,6 +177,8 @@ this hour".
 
 **What it shows.** About 6% of hours are stress hours, three quarters of them in July to September. The
 simple rule scores 0.75 on AUC-PR (1 is perfect); the best model scores 0.77.
+With the alarm threshold chosen on held-out data, logistic regression misses half as many stress hours
+as the yesterday rule (66 vs 130) for 75 more false alarms.
 
 **In plain words.** Stress hours come in heatwave runs, so yesterday already tells you most of what you
 need. Models help a little, and let an operator choose how many false alarms to accept to miss fewer
@@ -228,6 +230,9 @@ notebooks/GridPulse.ipynb   the full analysis, top to bottom, with every chart
 reports/figures/            all charts, named by notebook section
 reports/proposal.pdf        the original project proposal
 data/README.md              data sources and how the data is handled
+data/snapshot/              frozen ERCO inputs behind the reference run, with SHA256SUMS
+scripts/                    build the snapshot, run the notebook headlessly, check the reference numbers
+tests/                      pytest checks on the snapshot, the row counts and the feature list
 ```
 
 ---
