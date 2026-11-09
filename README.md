@@ -201,7 +201,25 @@ megawatts it can miss by.
 ## What is next
 
 - Run the same analysis on other US grids (PJM, MISO, CAISO, SPP) to see whether Texas stands out.
-- Freeze the input data in the repo with checksums, so anyone can reproduce every number exactly.
+
+## How to reproduce
+
+The repo holds a frozen copy of the input data (`data/snapshot/`, 12 MB), so a fresh clone gives the
+same numbers as my reference run on Oct 30, 2026. It needs no Google Drive and no internet.
+
+```
+git clone https://github.com/Arjunn28/gridpulse.git
+cd gridpulse
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+scripts/run_notebook.sh                      # runs the notebook, writes build/GridPulse.executed.ipynb
+python scripts/check_results.py              # compares 31 key numbers with the reference run
+pytest -q                                    # checks the data and the features
+```
+
+I ran this on Python 3.14. You can also open `notebooks/GridPulse.ipynb` in Google Colab and run all. In
+Colab the notebook uses Google Drive, and if the snapshot is not there it downloads fresh public data.
+EIA and Open-Meteo revise old values, so numbers from a fresh download can differ a little.
 
 ## Repo
 
@@ -211,8 +229,6 @@ reports/figures/            all charts, named by notebook section
 reports/proposal.pdf        the original project proposal
 data/README.md              data sources and how the data is handled
 ```
-
-Open the notebook in Google Colab and run all. It downloads the public data on the first run.
 
 ---
 
