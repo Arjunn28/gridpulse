@@ -14,144 +14,201 @@
 <meta property="og:title" content="GridPulse: has AI data center growth made Texas electricity harder to predict?">
 <meta property="og:description" content="Texas demand is still easy to forecast, but a shrinking share of it follows the weather. An analysis of hourly ERCOT data from 2019 to 2026.">
 <meta property="og:url" content="https://arjunn28.github.io/gridpulse/">
-<meta property="og:image" content="https://arjunn28.github.io/gridpulse/figures/08j_cooling_response_ci.png">
-<meta property="og:image:width" content="681">
-<meta property="og:image:height" content="412">
-<meta property="og:image:alt" content="Cooling response of Texas demand per year with 95% confidence intervals, falling from 5.8% in 2019 to 4.6% in 2025">
+<meta property="og:image" content="https://arjunn28.github.io/gridpulse/figures/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GridPulse: has AI data center growth made Texas electricity harder to predict? Not for demand, but a shrinking share of Texas demand follows the weather.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="GridPulse: has AI data center growth made Texas electricity harder to predict?">
 <meta name="twitter:description" content="Texas demand is still easy to forecast, but a shrinking share of it follows the weather.">
-<meta name="twitter:image" content="https://arjunn28.github.io/gridpulse/figures/08j_cooling_response_ci.png">
+<meta name="twitter:image" content="https://arjunn28.github.io/gridpulse/figures/og-card.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 
 <style>
 :root {
-  --bg: #ffffff;
-  --surface: #f5f5f3;
-  --ink: #1d1d1b;
-  --muted: #5d5c58;
-  --line: #deddd8;
+  --page: #f7f6f2;
+  --card: #ffffff;
+  --ink: #1a1d24;
+  --muted: #5b6070;
+  --line: #e4e1d9;
   --accent: #1f64bd;
-  --ok: #17694a;
-  --ok-bg: #e3f3ec;
-  --no: #9a2f2f;
-  --no-bg: #f9e5e5;
-  --mid: #7a5200;
-  --mid-bg: #fbf0d4;
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --accent-soft: #e9f1fb;
+  --panel: #fbfaf7;
+  --shadow: 0 1px 2px rgba(15, 27, 45, .06), 0 10px 28px rgba(15, 27, 45, .07);
+  --ok: #1f8a5f;
+  --no: #c0392b;
+  --mid: #d99a1a;
+  --ok-text: #17694a;  --ok-bg: #e3f3ec;
+  --no-text: #9a2f2f;  --no-bg: #f9e5e5;
+  --mid-text: #7a5200; --mid-bg: #fbf0d4;
+  --navy: #0f1b2d;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #131312;
-    --surface: #1d1d1b;
-    --ink: #ecebe7;
-    --muted: #a5a39c;
-    --line: #34332f;
+    --page: #0a1120;
+    --card: #121c2f;
+    --ink: #e8ecf3;
+    --muted: #9aa7bd;
+    --line: #24324a;
     --accent: #6aa7f0;
-    --ok: #6fd1a6;
-    --ok-bg: #12301f;
-    --no: #f0a0a0;
-    --no-bg: #3a1c1c;
-    --mid: #eab949;
-    --mid-bg: #382c0d;
+    --accent-soft: #16263f;
+    --panel: #eceae3;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px rgba(0, 0, 0, .35);
+    --ok: #3fb68a;
+    --no: #e5675a;
+    --mid: #e8b23c;
+    --ok-text: #6fd1a6;  --ok-bg: #12301f;
+    --no-text: #f0a0a0;  --no-bg: #3a1c1c;
+    --mid-text: #eab949; --mid-bg: #382c0d;
   }
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font: 17px/1.6 var(--font);
-}
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 400 17px/1.65 var(--font); -webkit-font-smoothing: antialiased; }
 a { color: var(--accent); }
-.wrap { max-width: 56rem; margin: 0 auto; padding: 0 16px; }
-.prose { max-width: 42rem; }
-h1, h2, h3 { line-height: 1.25; margin: 0; }
-h2 { font-size: 1.6rem; margin-bottom: 1rem; }
-h3 { font-size: 1.2rem; margin-bottom: .75rem; }
+h1, h2, h3 { line-height: 1.2; margin: 0; letter-spacing: -.02em; }
 p { margin: 0 0 1rem; }
-section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
-.eyebrow { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; }
+.wrap { max-width: 58rem; margin: 0 auto; padding: 0 20px; }
+.prose { max-width: 42rem; }
+section[id] { scroll-margin-top: 64px; }
+
+/* top bar */
+.bar { position: sticky; top: 0; z-index: 20; background: rgba(15, 27, 45, .94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255, 255, 255, .08); }
+.bar-in { display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 16px; }
+.bar a { color: #c9d3e3; text-decoration: none; font-size: .9rem; font-weight: 500; }
+.bar a:hover { color: #fff; }
+.bar .who { color: #fff; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
+.bar .links { display: flex; gap: 22px; align-items: center; }
+.bar .gh { color: #fff; border: 1px solid rgba(255, 255, 255, .28); border-radius: 999px; padding: 4px 14px; }
+@media (max-width: 40rem) { .bar .sec { display: none; } .bar .who { font-size: .88rem; } }
 
 /* hero */
-.hero { padding-top: 3rem; padding-bottom: 2.5rem; border-top: 0; }
-.hero h1 { font-size: clamp(1.9rem, 5.5vw, 2.9rem); letter-spacing: -.01em; margin-bottom: 1rem; }
-.answer { font-size: 1.25rem; max-width: 42rem; margin-bottom: 1.75rem; }
-.stats { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; }
-.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
-.stat b { display: block; font-size: 1.9rem; line-height: 1.15; margin-bottom: .35rem; }
-.stat span { color: var(--muted); font-size: .92rem; display: block; }
-@media (max-width: 40rem) { .stats { grid-template-columns: 1fr; } }
+.hero { position: relative; overflow: hidden; background: var(--navy); color: #fff; padding: 4rem 0 3.5rem;
+  background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 44px 44px; }
+.hero svg { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 70%; pointer-events: none; }
+.hero .wrap { position: relative; }
+.hero .eyebrow { color: #9fb0c9; font-size: .9rem; margin-bottom: 1.1rem; }
+.hero .eyebrow a { color: #dbe5f5; text-decoration: none; border-bottom: 1px solid rgba(219, 229, 245, .4); }
+.hero .eyebrow a:hover { color: #fff; border-color: #fff; }
+.hero h1 { font-size: clamp(2rem, 5.6vw, 3.2rem); font-weight: 800; letter-spacing: -.03em; max-width: 46rem; margin-bottom: 1.1rem; color: #fff; }
+.answer { font-size: 1.2rem; max-width: 40rem; margin-bottom: 2rem; color: #c3cbd8; }
+.answer strong { color: #fff; }
+.stats { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; }
+.stat { background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .12); border-top: 3px solid #4d94e8; border-radius: 10px; padding: 16px 18px 18px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.stat:nth-child(2) { border-top-color: #f0793f; }
+.stat b { display: block; font-size: 2rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.15; margin-bottom: .4rem; color: #fff; }
+.stat span { color: #aeb8c8; font-size: .9rem; line-height: 1.45; display: block; }
+@media (max-width: 40rem) { .stats { grid-template-columns: 1fr; } .hero { padding: 2.5rem 0 2.5rem; } }
 
-/* hypothesis cards */
-.cards { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
+/* sections */
+main section { padding: 3.5rem 0 0; }
+.label { display: block; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: .6rem; }
+h2 { font-size: clamp(1.55rem, 3.6vw, 2rem); font-weight: 700; margin-bottom: 1.1rem; }
+h3 { font-size: 1.1rem; font-weight: 700; }
+
+@media (max-width: 40rem) { .wrap { padding: 0 14px; } .finding { padding: 18px 14px 20px; } .lead-card { padding: 18px 16px; } .finding h3 { font-size: 1.1rem; gap: 10px; } }
+
+/* hypotheses */
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 40rem) { .cards { grid-template-columns: 1fr; } }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
-.card .tag { font-weight: 700; font-size: .85rem; color: var(--muted); letter-spacing: .04em; }
-.card h3 { font-size: 1.05rem; margin: .25rem 0 .75rem; font-weight: 600; }
-.card p { font-size: .95rem; color: var(--muted); margin: .75rem 0 0; }
-.verdict { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .85rem; font-weight: 700; }
-.v-ok { color: var(--ok); background: var(--ok-bg); }
-.v-no { color: var(--no); background: var(--no-bg); }
-.v-mid { color: var(--mid); background: var(--mid-bg); }
+.card { background: var(--card); border-radius: 12px; box-shadow: var(--shadow); border-left: 4px solid var(--line); padding: 18px 20px 20px; }
+.card.ok { border-left-color: var(--ok); }
+.card.no { border-left-color: var(--no); }
+.card.mid { border-left-color: var(--mid); }
+.card .tag { font-weight: 700; font-size: .8rem; color: var(--muted); letter-spacing: .08em; }
+.card h3 { font-size: 1.02rem; margin: .25rem 0 .8rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.35; }
+.card p { font-size: .94rem; color: var(--muted); margin: .85rem 0 0; }
+.verdict { display: inline-block; padding: 2px 11px; border-radius: 999px; font-size: .8rem; font-weight: 700; }
+.v-ok { color: var(--ok-text); background: var(--ok-bg); }
+.v-no { color: var(--no-text); background: var(--no-bg); }
+.v-mid { color: var(--mid-text); background: var(--mid-bg); }
 
-/* story */
-.chart-block { padding: 2rem 0; border-top: 1px solid var(--line); }
-.chart-block:first-of-type { border-top: 0; padding-top: 0; }
-.chart-block h3 { font-size: 1.3rem; }
-figure { margin: 0 0 1.25rem; }
-figure img { display: block; width: 100%; height: auto; background: #fff; border-radius: 8px; border: 1px solid var(--line); }
-figcaption { color: var(--muted); font-size: .88rem; margin-top: .4rem; }
+/* findings */
+.finding { background: var(--card); border-radius: 14px; box-shadow: var(--shadow); padding: 26px 26px 28px; margin-bottom: 22px; }
+.finding h3 { display: flex; align-items: center; gap: 14px; font-size: 1.25rem; margin-bottom: 1.1rem; letter-spacing: -.02em; line-height: 1.3; }
+.badge { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: var(--card); font-size: .95rem; font-weight: 700; letter-spacing: 0; }
+figure { margin: 0 0 1.4rem; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
+.panel img { display: block; width: 100%; height: auto; border-radius: 6px; background: #fff; }
+figcaption { color: var(--muted); font-size: .86rem; margin-top: .5rem; }
 .live { display: none; }
 figure.is-live .static { display: none; }
 figure.is-live .live { display: block; }
 .plot { width: 100%; height: 320px; }
 .plot.tall { height: 380px; }
 .toggle { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
-.toggle button {
-  font: inherit; font-size: .9rem; color: var(--ink); background: var(--surface);
-  border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer;
-}
-.toggle button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
+.toggle button { font: inherit; font-size: .88rem; font-weight: 500; color: var(--ink); background: var(--page); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.toggle button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--card); font-weight: 600; }
 .toggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.sub { font-size: .95rem; margin: 0 0 .25rem; font-weight: 600; }
-.say b { display: block; font-size: .8rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin-bottom: .15rem; }
-.say { margin-bottom: 1rem; }
-.say p { margin: 0; }
+.sub { font-size: .92rem; margin: 0 0 .25rem; font-weight: 600; }
 
+.say-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 52rem) { .say-grid { grid-template-columns: 1fr; gap: 14px; } }
+.say { font-size: .94rem; line-height: 1.6; }
+.say b { display: block; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .3rem; }
+.say p { margin: 0; }
+.say.takeaway { background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 12px 14px; font-weight: 500; }
+.say.takeaway b { color: var(--accent); }
+.say.takeaway p { font-weight: 500; }
+
+/* prose sections */
 ul.plain { padding-left: 1.2rem; margin: 0 0 1rem; }
-ul.plain li { margin-bottom: .5rem; }
-table { border-collapse: collapse; width: 100%; font-size: .95rem; margin-bottom: 1rem; }
-th, td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); }
-th { color: var(--muted); font-weight: 600; }
-@media (max-width: 40rem) {
-  table, thead, tbody, tr, th, td { display: block; }
-  thead { display: none; }
-  tr { padding: 8px 0; border-bottom: 1px solid var(--line); }
-  td { border: 0; padding: 2px 0; }
-  td:first-child { font-weight: 600; }
-}
-footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--muted); font-size: .92rem; }
-footer p { margin-bottom: .75rem; }
+ul.plain li { margin-bottom: .55rem; }
+.lead-card { background: var(--card); border-radius: 14px; box-shadow: var(--shadow); padding: 26px; }
+.lead-card h3 { margin: 1.4rem 0 .6rem; }
+
+/* footer */
+footer { margin-top: 4.5rem; background: var(--navy); color: #c3cbd8; padding: 2.5rem 0 2.75rem;
+  background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 44px 44px; }
+footer .who { color: #fff; font-weight: 700; font-size: 1.05rem; text-decoration: none; letter-spacing: -.01em; }
+footer .who:hover { text-decoration: underline; }
+footer .meta { color: #8f9db3; font-size: .88rem; margin: .2rem 0 1.2rem; }
+footer .links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+footer .links a { color: #dbe5f5; text-decoration: none; font-weight: 500; font-size: .95rem; border-bottom: 1px solid rgba(219, 229, 245, .35); }
+footer .links a:hover { color: #fff; border-color: #fff; }
 </style>
 </head>
 <body>
 
-<header class="wrap hero">
-  <p class="eyebrow">Arjun Abbimutt Nagendra Kumar · UT Austin · Fall 2026</p>
-  <h1>Has AI data center growth made Texas electricity harder to predict?</h1>
-  <p class="answer"><strong>Not for demand.</strong> Texas demand forecasts are as accurate as ever, but a shrinking share of that demand follows the weather. I used about 67,600 hours of ERCOT grid data from 2019 to 2026.</p>
-  <ul class="stats">
-    <li class="stat"><b>About 3%</b><span>Demand forecast error in every year, 24 hours ahead</span></li>
-    <li class="stat"><b>0.65 to 0.21</b><span>Share of Far West Texas demand that weather explains (R2), 2019 to 2025</span></li>
-    <li class="stat"><b>-0.70 points</b><span>Fall in the cooling response, early years against recent years. 95% interval -0.96 to -0.45</span></li>
-  </ul>
+<nav class="bar" aria-label="Page">
+  <div class="wrap bar-in">
+    <a class="who" href="https://ai-with-arjun.vercel.app">Arjun Abbimutt Nagendra Kumar</a>
+    <div class="links">
+      <a class="sec" href="#background">Question</a>
+      <a class="sec" href="#hypotheses">Hypotheses</a>
+      <a class="sec" href="#story">Findings</a>
+      <a class="sec" href="#method">Method</a>
+      <a class="gh" href="https://github.com/Arjunn28/gridpulse">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0 250 L10 222 L20 216 L30 224 L40 228 L50 218 L60 214 L70 231 L80 261 L90 279 L100 274 L110 265 L120 268 L130 277 L140 270 L150 242 L160 215 L170 208 L180 217 L190 220 L200 211 L210 206 L220 224 L230 254 L240 271 L250 267 L260 257 L270 261 L280 269 L290 263 L300 235 L310 207 L320 201 L330 209 L340 213 L350 203 L360 199 L370 216 L380 246 L390 264 L400 259 L410 250 L420 253 L430 262 L440 255 L450 228 L460 200 L470 193 L480 202 L490 205 L500 196 L510 191 L520 209 L530 239 L540 256 L550 252 L560 242 L570 246 L580 254 L590 248 L600 220 L610 192 L620 186 L630 194 L640 198 L650 188 L660 184 L670 201 L680 231 L690 249 L700 244 L710 235 L720 238 L730 247 L740 240 L750 213 L760 185 L770 178 L780 187 L790 190 L800 181 L810 176 L820 194 L830 224 L840 241 L850 237 L860 227 L870 231 L880 239 L890 233 L900 205 L910 177 L920 171 L930 179 L940 183 L950 173 L960 169 L970 186 L980 216 L990 234 L1000 229 L1010 220 L1020 223 L1030 232 L1040 225 L1050 198 L1060 170 L1070 163 L1080 172 L1090 175 L1100 166 L1110 161 L1120 179 L1130 209 L1140 226 L1150 222 L1160 212 L1170 216 L1180 224 L1190 218 L1200 190" fill="none" stroke="#4d94e8" stroke-opacity=".28" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+  </svg>
+  <div class="wrap">
+    <p class="eyebrow"><a href="https://ai-with-arjun.vercel.app">Arjun Abbimutt Nagendra Kumar</a> · UT Austin · Fall 2026</p>
+    <h1>Has AI data center growth made Texas electricity harder to predict?</h1>
+    <p class="answer"><strong>Not for demand.</strong> Texas demand forecasts are as accurate as ever, but a shrinking share of that demand follows the weather. I used about 67,600 hours of ERCOT grid data from 2019 to 2026.</p>
+    <ul class="stats">
+      <li class="stat"><b>About 3%</b><span>Demand forecast error in every year, 24 hours ahead</span></li>
+      <li class="stat"><b>0.65 to 0.21</b><span>Share of Far West Texas demand that weather explains (R2), 2019 to 2025</span></li>
+      <li class="stat"><b>-0.70 points</b><span>Fall in the cooling response, early years against recent years. 95% interval -0.96 to -0.45</span></li>
+    </ul>
+  </div>
 </header>
 
 <main class="wrap">
 
 <section id="background">
   <div class="prose">
+    <span class="label">Background</span>
     <h2>The question</h2>
     <p>ERCOT runs the power grid that serves about 90% of Texas electricity demand. For decades Texas demand was fairly easy to predict: when it is hot, air conditioners run and demand climbs. Weather, time of day and day of week explained most of what the grid needed.</p>
     <p>Data centers are now arriving in Texas at scale. ERCOT's queue of large-load connection requests passed 233 GW at the end of 2025, with more than 70% of it data centers (<a href="https://www.utilitydive.com/news/ercots-large-load-queue-jumped-almost-300-last-year-official/808820/">Utility Dive</a>). A data center does not respond to the weather. It runs at a steady level, day and night, summer and winter.</p>
@@ -160,27 +217,28 @@ footer p { margin-bottom: .75rem; }
 </section>
 
 <section id="hypotheses">
+  <span class="label">What I expected</span>
   <h2>Four hypotheses</h2>
   <div class="cards">
-    <article class="card">
+    <article class="card ok">
       <span class="tag">H1</span>
       <h3>Always-on load raises the overnight floor faster than the afternoon peak</h3>
       <span class="verdict v-ok">Supported</span>
       <p>I compared daily minimum and maximum demand by year, demand share by weather zone and clusters of daily load shapes.</p>
     </article>
-    <article class="card">
+    <article class="card no">
       <span class="tag">H2</span>
       <h3>This makes Texas load harder to predict</h3>
       <span class="verdict v-no">Rejected for demand</span>
       <p>I made 24-hour-ahead forecasts with linear and tree models and scored them year by year. Net load got harder, but only because solar grew.</p>
     </article>
-    <article class="card">
+    <article class="card ok">
       <span class="tag">H3</span>
       <h3>Texas load is becoming less weather-driven for its size</h3>
       <span class="verdict v-ok">Supported</span>
       <p>I regressed demand on heat and cold for each year and each weather zone, with bootstrap confidence intervals.</p>
     </article>
-    <article class="card">
+    <article class="card mid">
       <span class="tag">H4</span>
       <h3>Grid stress hours can be flagged a day ahead better than "same as yesterday"</h3>
       <span class="verdict v-mid">Partly</span>
@@ -190,48 +248,49 @@ footer p { margin-bottom: .75rem; }
 </section>
 
 <section id="story">
+  <span class="label">Findings</span>
   <h2>The story in eight charts</h2>
 
-  <div class="chart-block">
-    <h3>1. Texas demand follows the heat, and the whole curve moved up</h3>
+  <article class="finding">
+    <h3><span class="badge">1</span>Texas demand follows the heat, and the whole curve moved up</h3>
     <figure>
-      <img src="figures/07_demand_vs_temperature.png" width="978" height="516" loading="lazy" decoding="async" alt="Scatter of hourly Texas demand against temperature for 2019 and 2025. Demand rises steeply above about 20 degrees C and the 2025 curve sits about 10 GW higher.">
+      <div class="panel"><img src="figures/07_demand_vs_temperature.png" width="978" height="516" loading="lazy" decoding="async" alt="Scatter of hourly Texas demand against temperature for 2019 and 2025. Demand rises steeply above about 20 degrees C and the 2025 curve sits about 10 GW higher."></div>
     </figure>
-    <div class="prose">
-      <div class="say"><b>What I did</b><p>I plotted every hour of 2019 and 2025: temperature across, demand up. The lines are the average at each degree.</p></div>
-      <div class="say"><b>What it shows</b><p>The classic hockey stick: demand rises steeply above about 20C as air conditioning kicks in. In 2025 the whole curve sits about 10 GW higher, even on mild days.</p></div>
-      <div class="say"><b>In plain words</b><p>Texas still responds to heat, but there is now a lot more demand that is there whatever the weather.</p></div>
+    <div class="say-grid">
+      <div class="say"><b>Approach</b><p>I plotted every hour of 2019 and 2025: temperature across, demand up. The lines are the average at each degree.</p></div>
+      <div class="say"><b>Finding</b><p>The classic hockey stick: demand rises steeply above about 20C as air conditioning kicks in. In 2025 the whole curve sits about 10 GW higher, even on mild days.</p></div>
+      <div class="say takeaway"><b>Takeaway</b><p>Texas still responds to heat, but there is now a lot more demand that is there whatever the weather.</p></div>
     </div>
-  </div>
+  </article>
 
-  <div class="chart-block">
-    <h3>2. The overnight floor is rising faster than the afternoon peak</h3>
+  <article class="finding">
+    <h3><span class="badge">2</span>The overnight floor is rising faster than the afternoon peak</h3>
     <figure>
-      <img src="figures/03_load_shape_flattening.png" width="1308" height="428" loading="lazy" decoding="async" alt="Left: daily minimum and maximum demand indexed to 2019, with the minimum rising faster. Right: the ratio of minimum to maximum by year.">
+      <div class="panel"><img src="figures/03_load_shape_flattening.png" width="1308" height="428" loading="lazy" decoding="async" alt="Left: daily minimum and maximum demand indexed to 2019, with the minimum rising faster. Right: the ratio of minimum to maximum by year."></div>
     </figure>
-    <div class="prose">
-      <div class="say"><b>What I did</b><p>For every day, I took the lowest and highest hour of demand, then averaged by year.</p></div>
-      <div class="say"><b>What it shows</b><p>Since 2019 the daily low rose 41% and the daily high 34%. The low-to-high ratio climbed from 0.70 to 0.73.</p></div>
-      <div class="say"><b>In plain words</b><p>Days are getting flatter. Night-time demand is catching up with the afternoon, which is what always-on load looks like.</p></div>
+    <div class="say-grid">
+      <div class="say"><b>Approach</b><p>For every day, I took the lowest and highest hour of demand, then averaged by year.</p></div>
+      <div class="say"><b>Finding</b><p>Since 2019 the daily low rose 41% and the daily high 34%. The low-to-high ratio climbed from 0.70 to 0.73.</p></div>
+      <div class="say takeaway"><b>Takeaway</b><p>Days are getting flatter. Night-time demand is catching up with the afternoon, which is what always-on load looks like.</p></div>
     </div>
-  </div>
+  </article>
 
-  <div class="chart-block">
-    <h3>3. The growth is happening in Far West Texas</h3>
+  <article class="finding">
+    <h3><span class="badge">3</span>The growth is happening in Far West Texas</h3>
     <figure>
-      <img src="figures/05_zone_shares.png" width="973" height="483" loading="lazy" decoding="async" alt="Each weather zone's share of Texas demand by year. Far West and North rise while the others stay flat or fall.">
+      <div class="panel"><img src="figures/05_zone_shares.png" width="973" height="483" loading="lazy" decoding="async" alt="Each weather zone's share of Texas demand by year. Far West and North rise while the others stay flat or fall."></div>
     </figure>
-    <div class="prose">
-      <div class="say"><b>What I did</b><p>I split Texas demand into its 8 weather zones and tracked each zone's share.</p></div>
-      <div class="say"><b>What it shows</b><p>Far West Texas went from 7.7% to 13.5% of all Texas demand (2019 to 2025). Houston and Dallas lost share even though they grew.</p></div>
-      <div class="say"><b>In plain words</b><p>The new demand is landing in West Texas, where large industrial loads have been connecting.</p></div>
+    <div class="say-grid">
+      <div class="say"><b>Approach</b><p>I split Texas demand into its 8 weather zones and tracked each zone's share.</p></div>
+      <div class="say"><b>Finding</b><p>Far West Texas went from 7.7% to 13.5% of all Texas demand (2019 to 2025). Houston and Dallas lost share even though they grew.</p></div>
+      <div class="say takeaway"><b>Takeaway</b><p>The new demand is landing in West Texas, where large industrial loads have been connecting.</p></div>
     </div>
-  </div>
+  </article>
 
-  <div class="chart-block">
-    <h3>4. Demand did not get harder to predict. Net load did, because of solar</h3>
+  <article class="finding">
+    <h3><span class="badge">4</span>Demand did not get harder to predict. Net load did, because of solar</h3>
     <figure id="fig-error" data-chart="error">
-      <img class="static" src="figures/08f_error_by_fold_and_solar.png" width="1419" height="450" loading="lazy" decoding="async" alt="Left: forecast error by test window for demand, net load and a weather-only model. Right: average solar output and solar forecast error in MW by test window.">
+      <div class="panel static"><img src="figures/08f_error_by_fold_and_solar.png" width="1419" height="450" loading="lazy" decoding="async" alt="Left: forecast error by test window for demand, net load and a weather-only model. Right: average solar output and solar forecast error in MW by test window."></div>
       <div class="live">
         <p class="sub">Forecast error by test window end date (nMAE, lower is better)</p>
         <div class="plot" id="plot-error-lines" role="img" aria-label="Line chart of forecast error by test window for demand, net load and a weather-only model"></div>
@@ -240,34 +299,34 @@ footer p { margin-bottom: .75rem; }
       </div>
       <figcaption class="live">Hover or tap a point for its value.</figcaption>
     </figure>
-    <div class="prose">
-      <div class="say"><b>What I did</b><p>I trained a model to predict each hour 24 hours ahead from public weather, the calendar and recent demand. I tested it on five consecutive windows, always training only on the past.</p></div>
-      <div class="say"><b>What it shows</b><p>Demand error stays around 3% and is lowest in the latest window. Net load error rises from 10.6% to 12.4%. A model using only weather and the calendar gets steadily worse. The solar fleet tripled, so solar forecast misses in MW doubled.</p></div>
-      <div class="say"><b>In plain words</b><p>Hypothesis H2 was wrong for demand. Texas is still very predictable. What got harder is predicting how much other power plants must supply, and that is because of solar growth, not the new load.</p></div>
+    <div class="say-grid">
+      <div class="say"><b>Approach</b><p>I trained a model to predict each hour 24 hours ahead from public weather, the calendar and recent demand. I tested it on five consecutive windows, always training only on the past.</p></div>
+      <div class="say"><b>Finding</b><p>Demand error stays around 3% and is lowest in the latest window. Net load error rises from 10.6% to 12.4%. A model using only weather and the calendar gets steadily worse. The solar fleet tripled, so solar forecast misses in MW doubled.</p></div>
+      <div class="say takeaway"><b>Takeaway</b><p>Hypothesis H2 was wrong for demand. Texas is still very predictable. What got harder is predicting how much other power plants must supply, and that is because of solar growth, not the new load.</p></div>
     </div>
-  </div>
+  </article>
 
-  <div class="chart-block">
-    <h3>5. But Texas load is responding less to weather for its size</h3>
+  <article class="finding">
+    <h3><span class="badge">5</span>But Texas load is responding less to weather for its size</h3>
     <figure id="fig-cooling" data-chart="cooling">
-      <img class="static" src="figures/08j_cooling_response_ci.png" width="681" height="412" loading="lazy" decoding="async" alt="Cooling response per year with 95% confidence intervals, falling from 5.8% in 2019 to 4.6% in 2025.">
+      <div class="panel static"><img src="figures/08j_cooling_response_ci.png" width="681" height="412" loading="lazy" decoding="async" alt="Cooling response per year with 95% confidence intervals, falling from 5.8% in 2019 to 4.6% in 2025."></div>
       <div class="live">
         <p class="sub">Cooling response: extra demand per degree of heat, % of base demand</p>
         <div class="plot tall" id="plot-cooling" role="img" aria-label="Cooling response per year with 95% confidence intervals"></div>
       </div>
       <figcaption class="live">Dots are the yearly estimate. Bars are 95% confidence intervals from resampling whole weeks.</figcaption>
     </figure>
-    <div class="prose">
-      <div class="say"><b>What I did</b><p>For each year, I measured how much demand rises per degree of heat, as a percent of the year's base demand. Error bars are 95% confidence intervals built by resampling whole weeks.</p></div>
-      <div class="say"><b>What it shows</b><p>In 2019 each degree added 5.8% of base demand. In 2025, 4.6%. The early years (2019 to 2021) and recent years (2023 to 2025) differ by 0.70 points, with a 95% interval of -0.96 to -0.45 that does not touch zero.</p></div>
-      <div class="say"><b>In plain words</b><p>The drop is real, not noise. Base demand grew 31% while the extra demand per degree grew only 4%. A shrinking share of Texas demand is about the weather.</p></div>
+    <div class="say-grid">
+      <div class="say"><b>Approach</b><p>For each year, I measured how much demand rises per degree of heat, as a percent of the year's base demand. Error bars are 95% confidence intervals built by resampling whole weeks.</p></div>
+      <div class="say"><b>Finding</b><p>In 2019 each degree added 5.8% of base demand. In 2025, 4.6%. The early years (2019 to 2021) and recent years (2023 to 2025) differ by 0.70 points, with a 95% interval of -0.96 to -0.45 that does not touch zero.</p></div>
+      <div class="say takeaway"><b>Takeaway</b><p>The drop is real, not noise. Base demand grew 31% while the extra demand per degree grew only 4%. A shrinking share of Texas demand is about the weather.</p></div>
     </div>
-  </div>
+  </article>
 
-  <div class="chart-block">
-    <h3>6. Far West Texas has almost stopped following the weather</h3>
+  <article class="finding">
+    <h3><span class="badge">6</span>Far West Texas has almost stopped following the weather</h3>
     <figure id="fig-zones" data-chart="zones">
-      <img class="static" src="figures/08k_zone_heatmaps.png" width="1748" height="407" loading="lazy" decoding="async" alt="Three heatmaps by weather zone and year: R2 of weather and calendar, cooling response, and daily minimum to maximum ratio. Far West R2 falls from 0.65 to 0.21.">
+      <div class="panel static"><img src="figures/08k_zone_heatmaps.png" width="1748" height="407" loading="lazy" decoding="async" alt="Three heatmaps by weather zone and year: R2 of weather and calendar, cooling response, and daily minimum to maximum ratio. Far West R2 falls from 0.65 to 0.21."></div>
       <div class="live">
         <div class="toggle" role="group" aria-label="Choose a measure">
           <button type="button" data-k="r2" aria-pressed="true">Weather explains (R2)</button>
@@ -278,70 +337,75 @@ footer p { margin-bottom: .75rem; }
       </div>
       <figcaption class="live">Darker is higher. Read the Far West row against the Coast and North Central rows.</figcaption>
     </figure>
-    <div class="prose">
-      <div class="say"><b>What I did</b><p>I repeated the same weather test for each zone and year. R2 is the share of each zone's demand that weather and the calendar explain, where 1 means fully explained.</p></div>
-      <div class="say"><b>What it shows</b><p>In Far West Texas that share fell from 0.65 to 0.21. Houston, Dallas, Austin and Corpus Christi stay between 0.82 and 0.92 in every year.</p></div>
-      <div class="say"><b>In plain words</b><p>The change is concentrated in one region. That fits large always-on loads like data centers and crypto mining, though oil and gas activity there is another possible driver.</p></div>
+    <div class="say-grid">
+      <div class="say"><b>Approach</b><p>I repeated the same weather test for each zone and year. R2 is the share of each zone's demand that weather and the calendar explain, where 1 means fully explained.</p></div>
+      <div class="say"><b>Finding</b><p>In Far West Texas that share fell from 0.65 to 0.21. Houston, Dallas, Austin and Corpus Christi stay between 0.82 and 0.92 in every year.</p></div>
+      <div class="say takeaway"><b>Takeaway</b><p>The change is concentrated in one region. That fits large always-on loads like data centers and crypto mining, though oil and gas activity there is another possible driver.</p></div>
     </div>
-  </div>
+  </article>
 
-  <div class="chart-block">
-    <h3>7. Old weather patterns no longer describe Texas</h3>
+  <article class="finding">
+    <h3><span class="badge">7</span>Old weather patterns no longer describe Texas</h3>
     <figure>
-      <img src="figures/09h_training_history.png" width="869" height="407" loading="lazy" decoding="async" alt="Error of a weather-only model for the latest year when trained on 1, 2, 3, 4 years or all years of history. Error rises as older years are added.">
+      <div class="panel"><img src="figures/09h_training_history.png" width="869" height="407" loading="lazy" decoding="async" alt="Error of a weather-only model for the latest year when trained on 1, 2, 3, 4 years or all years of history. Error rises as older years are added."></div>
     </figure>
-    <div class="prose">
-      <div class="say"><b>What I did</b><p>I predicted the most recent year using weather alone, trained on the last 1, 2, 3 or 4 years, or on everything.</p></div>
-      <div class="say"><b>What it shows</b><p>With one year of history the error is 4.3%. With all years it is 13.5%. Adding older data makes the weather-only model worse. A full model that also knows recent demand stays near 3%.</p></div>
-      <div class="say"><b>In plain words</b><p>The way Texas demand responded to weather in 2019 no longer fits 2026. To stay accurate, a forecast now has to know the rising always-on floor.</p></div>
+    <div class="say-grid">
+      <div class="say"><b>Approach</b><p>I predicted the most recent year using weather alone, trained on the last 1, 2, 3 or 4 years, or on everything.</p></div>
+      <div class="say"><b>Finding</b><p>With one year of history the error is 4.3%. With all years it is 13.5%. Adding older data makes the weather-only model worse. A full model that also knows recent demand stays near 3%.</p></div>
+      <div class="say takeaway"><b>Takeaway</b><p>The way Texas demand responded to weather in 2019 no longer fits 2026. To stay accurate, a forecast now has to know the rising always-on floor.</p></div>
     </div>
-  </div>
+  </article>
 
-  <div class="chart-block">
-    <h3>8. Grid stress hours: yesterday is a strong guide</h3>
+  <article class="finding">
+    <h3><span class="badge">8</span>Grid stress hours: yesterday is a strong guide</h3>
     <figure>
-      <img src="figures/10a_stress_hours.png" width="1521" height="429" loading="lazy" decoding="async" alt="Left: share of stress hours by month, concentrated in July to September. Right: one summer with the moving 95th percentile line and the stress hours above it.">
+      <div class="panel"><img src="figures/10a_stress_hours.png" width="1521" height="429" loading="lazy" decoding="async" alt="Left: share of stress hours by month, concentrated in July to September. Right: one summer with the moving 95th percentile line and the stress hours above it."></div>
     </figure>
-    <div class="prose">
-      <div class="say"><b>What I did</b><p>I called an hour "stressed" when net load was in the top 5% of the past year. Then I trained classifiers to flag those hours a day ahead and compared them with a simple rule: "stressed yesterday at this hour".</p></div>
-      <div class="say"><b>What it shows</b><p>About 6% of hours are stress hours, three quarters of them in July to September. The simple rule scores 0.75 on AUC-PR (1 is perfect); the best model scores 0.77. With the alarm threshold chosen on held-out data, logistic regression misses half as many stress hours as the yesterday rule (66 vs 130) for 75 more false alarms.</p></div>
-      <div class="say"><b>In plain words</b><p>Stress hours come in heatwave runs, so yesterday already tells you most of what you need. Models help a little, and let an operator choose how many false alarms to accept to miss fewer real stress hours.</p></div>
+    <div class="say-grid">
+      <div class="say"><b>Approach</b><p>I called an hour "stressed" when net load was in the top 5% of the past year. Then I trained classifiers to flag those hours a day ahead and compared them with a simple rule: "stressed yesterday at this hour".</p></div>
+      <div class="say"><b>Finding</b><p>About 6% of hours are stress hours, three quarters of them in July to September. The simple rule scores 0.75 on AUC-PR (1 is perfect); the best model scores 0.77. With the alarm threshold chosen on held-out data, logistic regression misses half as many stress hours as the yesterday rule (66 vs 130) for 75 more false alarms.</p></div>
+      <div class="say takeaway"><b>Takeaway</b><p>Stress hours come in heatwave runs, so yesterday already tells you most of what you need. Models help a little, and let an operator choose how many false alarms to accept to miss fewer real stress hours.</p></div>
     </div>
-  </div>
+  </article>
 </section>
 
 <section id="conclusion">
   <div class="prose">
+    <span class="label">The answer</span>
     <h2>Conclusion</h2>
     <p>Texas electricity is <strong>not</strong> harder to predict. Demand forecasts are as accurate as ever. But the reason they work has changed. A shrinking share of Texas demand follows the weather, the change is concentrated in Far West Texas where large new loads are connecting and a forecast that ignores the rising always-on floor falls apart. The real new difficulty is on the supply side: as solar grows, so do the megawatts it can miss by.</p>
   </div>
 </section>
 
 <section id="method">
-  <div class="prose">
-    <h2>Data and method</h2>
-    <p>Everything is public and free, about 67,600 hours from January 2019 to September 2026.</p>
-    <ul class="plain">
-      <li><a href="https://www.eia.gov/electricity/gridmonitor/">EIA-930 Hourly Electric Grid Monitor</a>, BALANCE files: hourly demand, ERCOT's own day-ahead forecast and generation by fuel. Demand is the main target. Demand minus wind and solar ("net load") is the second target. ERCOT's forecast is the benchmark.</li>
-      <li>EIA-930 SUBREGION files: the same demand split across ERCOT's 8 weather zones. This shows where in Texas demand is growing.</li>
-      <li><a href="https://open-meteo.com/en/docs/historical-weather-api">Open-Meteo historical weather</a> (ERA5): hourly temperature, humidity, wind, cloud and sunshine at one station per weather zone, the same eight stations used by Skiles, Rhodes and Webber (2023). I weight each zone by its share of demand to build one Texas-wide weather signal.</li>
-    </ul>
-    <p><strong>Method.</strong> I predict each hour 24 hours ahead from weather, the calendar and recent demand, with linear models (OLS, Ridge and Lasso) and tree models (random forest and gradient boosting). I test on five consecutive windows and always train only on the past. Confidence intervals come from resampling whole weeks, because hourly errors are strongly correlated. The repo holds a frozen copy of the inputs, so anyone can rerun the notebook and get the same numbers.</p>
-    <h3>Five silent data traps</h3>
-    <p>None of these raised an error. Each would have quietly corrupted the results.</p>
-    <ul class="plain">
-      <li>EIA renamed its columns in 2024.</li>
-      <li>EIA and Open-Meteo stamp the same hour differently, so the weather had to be shifted by an hour.</li>
-      <li>Two columns shared a name: EIA calls wind generation "wind", and so does the weather data for wind speed.</li>
-      <li>The target was misaligned by a day.</li>
-      <li>Same-hour wind and solar let the model rebuild the answer by arithmetic, so I left them out of the features.</li>
-    </ul>
+  <span class="label">How I did it</span>
+  <h2>Data and method</h2>
+  <div class="lead-card">
+    <div class="prose">
+      <p>Everything is public and free, about 67,600 hours from January 2019 to September 2026.</p>
+      <ul class="plain">
+        <li><a href="https://www.eia.gov/electricity/gridmonitor/">EIA-930 Hourly Electric Grid Monitor</a>, BALANCE files: hourly demand, ERCOT's own day-ahead forecast and generation by fuel. Demand is the main target. Demand minus wind and solar ("net load") is the second target. ERCOT's forecast is the benchmark.</li>
+        <li>EIA-930 SUBREGION files: the same demand split across ERCOT's 8 weather zones. This shows where in Texas demand is growing.</li>
+        <li><a href="https://open-meteo.com/en/docs/historical-weather-api">Open-Meteo historical weather</a> (ERA5): hourly temperature, humidity, wind, cloud and sunshine at one station per weather zone, the same eight stations used by Skiles, Rhodes and Webber (2023). I weight each zone by its share of demand to build one Texas-wide weather signal.</li>
+      </ul>
+      <p><strong>Method.</strong> I predict each hour 24 hours ahead from weather, the calendar and recent demand, with linear models (OLS, Ridge and Lasso) and tree models (random forest and gradient boosting). I test on five consecutive windows and always train only on the past. Confidence intervals come from resampling whole weeks, because hourly errors are strongly correlated. The repo holds a frozen copy of the inputs, so anyone can rerun the notebook and get the same numbers.</p>
+      <h3>Five silent data traps</h3>
+      <p>None of these raised an error. Each would have quietly corrupted the results.</p>
+      <ul class="plain">
+        <li>EIA renamed its columns in 2024.</li>
+        <li>EIA and Open-Meteo stamp the same hour differently, so the weather had to be shifted by an hour.</li>
+        <li>Two columns shared a name: EIA calls wind generation "wind", and so does the weather data for wind speed.</li>
+        <li>The target was misaligned by a day.</li>
+        <li>Same-hour wind and solar let the model rebuild the answer by arithmetic, so I left them out of the features.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
 <section id="limitations">
+  <span class="label">Caveats</span>
+  <h2>Limitations</h2>
   <div class="prose">
-    <h2>Limitations</h2>
     <ul class="plain">
       <li>Weather inputs are actual weather, not forecasts, so real-world errors would be somewhat higher.</li>
       <li>ERCOT does not publish demand by customer type, so the Far West pattern is consistent with data center growth but does not prove it.</li>
@@ -354,10 +418,14 @@ footer p { margin-bottom: .75rem; }
 </main>
 
 <footer>
-  <div class="wrap prose">
-    <p><a href="https://github.com/Arjunn28/gridpulse">Code and data on GitHub</a> · <a href="https://github.com/Arjunn28/gridpulse/blob/main/notebooks/GridPulse.ipynb">The full notebook</a></p>
-    <p>AI use: Claude (Anthropic) assisted with scoping, finding data sources, drafting code, debugging and review. All runs, checks and analysis decisions are my own.</p>
-    <p>Arjun Abbimutt Nagendra Kumar · UT Austin · Fall 2026</p>
+  <div class="wrap">
+    <a class="who" href="https://ai-with-arjun.vercel.app">Arjun Abbimutt Nagendra Kumar</a>
+    <p class="meta">UT Austin · Fall 2026</p>
+    <div class="links">
+      <a href="https://github.com/Arjunn28/gridpulse">GitHub repo</a>
+      <a href="https://github.com/Arjunn28/gridpulse/blob/main/notebooks/GridPulse.ipynb">Full notebook</a>
+      <a href="https://www.linkedin.com/in/arjun-an/">LinkedIn</a>
+    </div>
   </div>
 </footer>
 
@@ -416,9 +484,11 @@ footer p { margin-bottom: .75rem; }
                  line: { color: s.color, dash: s.dash, width: 2.5 }, marker: { color: s.color, symbol: s.symbol, size: 8 },
                  hovertemplate: "%{x}: %{y:.1f}%<extra>" + name + "</extra>" };
       });
+      var narrow = document.getElementById("plot-error-lines").clientWidth < 500;
+      var xax = { type: "category", tickangle: 0, tickfont: { size: narrow ? 10 : 13 } };
       Plotly.react("plot-error-lines", traces, baseLayout({
         yaxis: { title: { text: "nMAE %" }, rangemode: "tozero" },
-        xaxis: { type: "category" },
+        xaxis: xax,
         legend: { orientation: "h", y: -0.18 }, margin: { b: 100 }
       }), CONFIG);
       Plotly.react("plot-error-solar", [
@@ -427,7 +497,7 @@ footer p { margin-bottom: .75rem; }
         { type: "bar", x: d.test_end, y: d.solar.mae_mw, name: "solar forecast error (MAE)", marker: { color: ORANGE },
           hovertemplate: "%{x}: %{y:,.0f} MW<extra>solar forecast error</extra>" }
       ], baseLayout({
-        barmode: "group", yaxis: { title: { text: "MW" } }, xaxis: { type: "category" },
+        barmode: "group", yaxis: { title: { text: "MW" } }, xaxis: xax,
         legend: { orientation: "h", y: -0.18 }, margin: { b: 100 }
       }), CONFIG);
     };
