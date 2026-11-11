@@ -234,8 +234,3 @@ data/snapshot/              frozen ERCO inputs behind the reference run, with SH
 scripts/                    build the snapshot, run the notebook headlessly, check the reference numbers
 tests/                      pytest checks on the snapshot, the row counts and the feature list
 ```
-
----
-
-*AI use: Claude (Anthropic) assisted with scoping, finding data sources, drafting code, debugging and
-review. All runs, checks and analysis decisions are my own.*
